@@ -135,5 +135,10 @@
       }
     }
   },
-  "defaultProject": "mood-app"
+  "defaultProject": "mood-app",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "sass"
+    }
+  }
 }
