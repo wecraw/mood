@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
   title = 'mood-app';
   clientId = 'b0ceffc831b04ac4b63ab619617fec38';
   responseType = 'code';
-  redirectURI = 'http://localhost:4200/';
   scope = 'user-read-recently-played';
 
   response: Object;
@@ -32,8 +31,15 @@ export class AppComponent implements OnInit {
   artistArray = [];
   displayChart: boolean = false;
 
-  authUrl = 'https://accounts.spotify.com/authorize?client_id=b0ceffc831b04ac4b63ab619617fec38&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2F&scope=user-read-recently-played'
+  // authUrl = 'https://accounts.spotify.com/authorize?client_id=b0ceffc831b04ac4b63ab619617fec38&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2&scope=user-read-recently-played'
 
+  redirectURI = 'https://wecraw.github.io/mood/';
+  // redirectURI = 'http://localhost:4200/';
+  encodedURI = encodeURI(this.redirectURI)
+
+
+
+  authUrl = 'https://accounts.spotify.com/authorize?client_id=b0ceffc831b04ac4b63ab619617fec38&response_type=token&redirect_uri='+this.encodedURI+'&scope=user-read-recently-played'
 
 
 
