@@ -34,8 +34,8 @@ export class AppComponent implements OnInit {
   spacingArray = linspace(1,50,50);
 
 
-  //redirectURI = 'https://wecraw.github.io/mood/';
-  redirectURI = 'http://localhost:4200/';
+  redirectURI = 'https://wecraw.github.io/mood/';
+  // redirectURI = 'http://localhost:4200/';
   encodedURI = encodeURI(this.redirectURI)
 
   authUrl = 'https://accounts.spotify.com/authorize?client_id='+this.clientId+'&response_type=token&redirect_uri='+this.encodedURI+'&scope=user-read-recently-played'
