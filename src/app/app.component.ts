@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import {SpotifyService} from './shared/index';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { Chart } from 'chart.js';
+import * as linspace from 'linspace'
 
 
 @Component({
@@ -30,21 +31,16 @@ export class AppComponent implements OnInit {
   nameArray = [];
   artistArray = [];
   displayChart: boolean = false;
+  spacingArray = linspace(1,50,50);
 
-  // authUrl = 'https://accounts.spotify.com/authorize?client_id=b0ceffc831b04ac4b63ab619617fec38&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2&scope=user-read-recently-played'
 
   //redirectURI = 'https://wecraw.github.io/mood/';
   redirectURI = 'http://localhost:4200/';
   encodedURI = encodeURI(this.redirectURI)
 
+  authUrl = 'https://accounts.spotify.com/authorize?client_id='+this.clientId+'&response_type=token&redirect_uri='+this.encodedURI+'&scope=user-read-recently-played'
 
-
-  authUrl = 'https://accounts.spotify.com/authorize?client_id=b0ceffc831b04ac4b63ab619617fec38&response_type=token&redirect_uri='+this.encodedURI+'&scope=user-read-recently-played'
-
-
-
-
-  constructor(private spotifyService: SpotifyService, private http: HttpClient) { }
+  constructor(private spotifyService: SpotifyService) { }
 
   ngOnInit(){
     let url:string = window.location.href;
@@ -97,7 +93,8 @@ export class AppComponent implements OnInit {
           this.chart = new Chart(this.canvas.nativeElement.getContext('2d'), {
             type: 'line',
             data: {
-              labels: this.timestampArray, // x axis data
+              // labels: this.timestampArray, // x axis data
+              labels: this.spacingArray,
 
               datasets: [
                 {
@@ -118,13 +115,18 @@ export class AppComponent implements OnInit {
               },
               scales: {
                 xAxes: [{
-                  ticks: {
-                    stepSize: 0.001
-                  },
-                  type:'time',
-                display: true
+
+                display: false
                 }],
                 yAxes: [{
+                  ticks: {
+                    min: 0,
+                    max: 1
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Valence'
+                  },
                   display: true
                 }],
               },
@@ -141,49 +143,8 @@ export class AppComponent implements OnInit {
             }
           });
         })
-
-        // console.log(this.valenceHistory)
-        // console.log(this.timestampArray)
-
-
     }
   }
-
-
-  // drawChart() {
-  //   console.log(this.valenceHistory)
-  //   console.log(this.timestampArray)
-  //   this.chart = new Chart(this.canvas.nativeElement.getContext('2d'), {
-  //     type: 'line',
-  //     data: {
-  //       // labels: [new Date("2018-12-14T22:09:05.476Z").toLocaleString(), new Date("2018-12-14T22:05:30.108Z").toLocaleString(), new Date("2018-12-14T22:02:00.644Z").toLocaleString()], // your labels array
-  //       labels: this.timestampArray, // x axis data
-  //
-  //       datasets: [
-  //         {
-  //           data: this.valenceHistory, // your data array
-  //           borderColor: '#00AEFF',
-  //           fill: false
-  //         }
-  //       ]
-  //     },
-  //     options: {
-  //       legend: {
-  //         display: false
-  //       },
-  //       scales: {
-  //         xAxes: [{
-  //           type:'time',
-  //         display: true
-  //         }],
-  //         yAxes: [{
-  //           display: true
-  //         }],
-  //       }
-  //     }
-  //   });
-  //
-  //   }
 
   //returns true if user has authenitcated in current session
   checkAuth(): boolean{
@@ -196,11 +157,6 @@ export class AppComponent implements OnInit {
 
   }
 
-  //returns comma separated list of 50 most recent song IDs
-  getListeningHistory(): any{
-
-  }
-
   getTimestampArray(): any{
 
     let timestampArray = [];
@@ -210,40 +166,5 @@ export class AppComponent implements OnInit {
     return timestampArray;
 
   }
-
-  // createChart(){
-  //   this.displayChart = true;
-  //   let dateArray = this.getTimestampArray();
-  //   console.log(dateArray)
-  //   this.chart = new Chart(this.canvas.nativeElement.getContext('2d'), {
-  //     type: 'line',
-  //     data: {
-  //       // labels: [new Date("2018-12-14T22:09:05.476Z").toLocaleString(), new Date("2018-12-14T22:05:30.108Z").toLocaleString(), new Date("2018-12-14T22:02:00.644Z").toLocaleString()], // your labels array
-  //       labels: [dateArray], // x axis data
-  //
-  //       datasets: [
-  //         {
-  //           data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // your data array
-  //           borderColor: '#00AEFF',
-  //           fill: false
-  //         }
-  //       ]
-  //     },
-  //     options: {
-  //       legend: {
-  //         display: false
-  //       },
-  //       scales: {
-  //         xAxes: [{
-  //           type:'time',
-  //         display: true
-  //         }],
-  //         yAxes: [{
-  //           display: true
-  //         }],
-  //       }
-  //     }
-  //   });
-  // }
 
 }
