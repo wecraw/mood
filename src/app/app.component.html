@@ -11,8 +11,17 @@
 <!-- <div>
   <canvas #canvas id="canvas">{{ chart }}</canvas>
 </div> -->
-<div class="chartWrapper">
+<div [hidden]="!checkAuth()" class="chartWrapper">
     <div class="chartAreaWrapper">
         <canvas #canvas id="canvas" height="300" width="2000">{{chart}}</canvas>
     </div>
-    </div>
+</div>
+
+<div *ngIf=checkAuth()>
+  The above graph plots the 'valence' of the songs in your recent listening history. <br>
+
+   Valence is a measure of the overall 'mood' of a song. <br>
+  Tracks with high valence sound more positive (happy, cheerful, euphoric), while tracks with low valence sound more negative (sad, depressed, angry).<br>
+  Valence is computed through machine learning: an algorithm was trained on a set of songs that were particularly happy or sad, and then resulting
+  knowledge was applied to assess the mood of other songs in the Spotify library.
+  </div>

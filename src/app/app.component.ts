@@ -33,8 +33,8 @@ export class AppComponent implements OnInit {
 
   // authUrl = 'https://accounts.spotify.com/authorize?client_id=b0ceffc831b04ac4b63ab619617fec38&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2&scope=user-read-recently-played'
 
-  redirectURI = 'https://wecraw.github.io/mood/';
-  // redirectURI = 'http://localhost:4200/';
+  //redirectURI = 'https://wecraw.github.io/mood/';
+  redirectURI = 'http://localhost:4200/';
   encodedURI = encodeURI(this.redirectURI)
 
 
@@ -104,7 +104,8 @@ export class AppComponent implements OnInit {
                   data: this.valenceHistory, // your data array
                   lineTension: 0,
                   borderColor: '#00AEFF',
-                  fill: false
+                  fill: false,
+                  pointRadius: 8
                 }
               ]
             },
