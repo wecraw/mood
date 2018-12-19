@@ -1,7 +1,6 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {SpotifyService} from './shared/index';
-import { switchMap, tap, map } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { Chart } from 'chart.js';
 import * as linspace from 'linspace'
 
@@ -27,12 +26,13 @@ export class AppComponent implements OnInit {
   audioFeaturesDetails: any;
   valenceResponse: any;
   valenceHistory = [];
+  danceabilityHistory = [];
+  energyHistory = [];
   timestampArray = [];
   nameArray = [];
   artistArray = [];
   displayChart: boolean = false;
   spacingArray = linspace(1,50,50);
-
 
   redirectURI = 'https://wecraw.github.io/mood/';
   // redirectURI = 'http://localhost:4200/';
@@ -84,6 +84,9 @@ export class AppComponent implements OnInit {
           this.audioFeaturesDetails = res2;
           for (let j in res2['audio_features']){
             this.valenceHistory[j] = res2['audio_features'][j]['valence']
+            this.danceabilityHistory[j] = res2['audio_features'][j]['danceability']
+            this.energyHistory[j] = res2['audio_features'][j]['energy']
+
           }
 
           let names = this.nameArray;
@@ -97,12 +100,34 @@ export class AppComponent implements OnInit {
 
               datasets: [
                 {
+                  label: 'Valence (mood)',
                   data: this.valenceHistory, // your data array
                   lineTension: 0,
                   borderColor: '#00AEFF',
                   fill: false,
                   pointRadius: 8
+                },
+                {
+                  label: 'Danceability',
+                  data: this.danceabilityHistory, // your data array
+                  lineTension: 0,
+                  borderColor: '#CC0000',
+                  fill: false,
+                  pointRadius: 8,
+                  pointStyle: 'triangle',
+                  hidden: true
+                },
+                {
+                  label: 'Energy',
+                  data: this.energyHistory, // your data array
+                  lineTension: 0,
+                  borderColor: '#78AB46',
+                  fill: false,
+                  pointRadius: 8,
+                  pointStyle: 'rect',
+                  hidden: true
                 }
+
               ]
             },
             options: {
@@ -110,12 +135,23 @@ export class AppComponent implements OnInit {
               maintainAspectRatio: false,
 
               legend: {
-                display: false
+                display: true,
+                position: 'bottom'
               },
               scales: {
                 xAxes: [{
 
-                display: false
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: '(click to toggle data)'
+                },
+                ticks: {
+                  display: false
+                },
+                gridLines: {
+                  display: false
+                }
                 }],
                 yAxes: [{
                   ticks: {
@@ -131,7 +167,7 @@ export class AppComponent implements OnInit {
               },
               tooltips: {
                 callbacks: {
-                  beforeTitle: function(t,d) {
+                  beforeTitle: function(t) {
                     return (artists[t[0].index] + ' - ' + names[t[0].index])
                   },
                   title: function(){} //hide datetime in tooltip
