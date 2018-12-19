@@ -63,7 +63,6 @@ export class AppComponent implements OnInit {
 
         tap(res1 => {
           this.listeningHistoryDetails = res1;
-          console.log(res1)
           for (let i in res1['items']){
             this.timestampArray[i] = new Date(res1['items'][i]['played_at'])
             this.nameArray[i] = res1['items'][i]['track']['name']
