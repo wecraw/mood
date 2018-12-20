@@ -32,6 +32,3 @@ export class SpotifyService {
 
 
 }
-//    let params = new HttpParams().set('ids', this.getListeningHistory())
-
-//    return this.http.get('https://api.spotify.com/v1/audio-features',options);

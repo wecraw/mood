@@ -9,9 +9,25 @@
 </div>
 <br>
 <div *ngIf=checkAuth()>
-  Tracks with high valence sound more positive (happy, cheerful, euphoric), <br>
-  while tracks with low valence sound more negative (sad, depressed, angry).<br>
-  Valence is computed through machine learning: an algorithm was trained on <br>
-  a set of songs that were particularly happy or sad, and then resulting knowledge <br>
-  was applied to assess the mood of other songs in the Spotify library.
+  <h3> About </h3>
+
+
+
+  <ul>
+    <li>
+      Valence describes the musical positiveness conveyed by a track. Tracks with high valence sound more positive (happy, cheerful, euphoric),
+      while tracks with low valence sound more negative (sad, depressed, angry).
+    </li>
+    <li>
+    	Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity.
+      A value of 0.0 is least danceable and 1.0 is most danceable.
+    </li>
+    <li>
+    	Energy represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.
+    </li>
+    <li>
+      These values are reported by Spotify. They attempt to quantify highly subjective song features, and carry no guarantee of accuracy. <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/">Visit here</a> to learn more about these audio features, and <a href="https://web.archive.org/web/20170422195736/http://blog.echonest.com/post/66097438564/plotting-musics-emotional-valence-1950-2013">visit here</a> to learn more about the machine learning used to compute valence.
+    </li>
+
+  </ul>
   </div>

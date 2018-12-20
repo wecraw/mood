@@ -4,13 +4,11 @@ import { switchMap, tap } from 'rxjs/operators';
 import { Chart } from 'chart.js';
 import * as linspace from 'linspace'
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
-
 
 export class AppComponent implements OnInit {
 
@@ -62,6 +60,7 @@ export class AppComponent implements OnInit {
       this.spotifyService.getListeningHistory().pipe(
 
         tap(res1 => {
+          if (res1 === 'Unauthorized'){this.login()}
           this.listeningHistoryDetails = res1;
           for (let i in res1['items']){
             this.timestampArray[i] = new Date(res1['items'][i]['played_at'])
@@ -105,7 +104,7 @@ export class AppComponent implements OnInit {
                   lineTension: 0,
                   borderColor: '#00AEFF',
                   fill: false,
-                  pointRadius: 8
+                  pointRadius: 9
                 },
                 {
                   label: 'Danceability',
@@ -113,7 +112,7 @@ export class AppComponent implements OnInit {
                   lineTension: 0,
                   borderColor: '#CC0000',
                   fill: false,
-                  pointRadius: 8,
+                  pointRadius: 9,
                   pointStyle: 'triangle',
                   hidden: true
                 },
@@ -123,7 +122,7 @@ export class AppComponent implements OnInit {
                   lineTension: 0,
                   borderColor: '#78AB46',
                   fill: false,
-                  pointRadius: 8,
+                  pointRadius: 9,
                   pointStyle: 'rect',
                   hidden: true
                 }
@@ -160,7 +159,7 @@ export class AppComponent implements OnInit {
                   },
                   scaleLabel: {
                     display: true,
-                    labelString: 'Valence'
+                    labelString: 'Score'
                   },
                   display: true
                 }],
