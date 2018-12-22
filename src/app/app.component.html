@@ -2,10 +2,9 @@
 
 <img *ngIf="!checkAuth()" class="login" src="assets/login.png" (click)="login()">
 
-<div [hidden]="!checkAuth()" class="chartWrapper">
-    <div class="chartAreaWrapper">
+<div [hidden]="!checkAuth()">
         <canvas #canvas id="canvas" height="300" width="2000">{{chart}}</canvas>
-    </div>
+        <h4>(Click to toggle data)</h4>
 </div>
 <br>
 <div *ngIf=checkAuth()>

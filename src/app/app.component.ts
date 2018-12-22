@@ -93,6 +93,7 @@ export class AppComponent implements OnInit {
 
           this.chart = new Chart(this.canvas.nativeElement.getContext('2d'), {
             type: 'line',
+
             data: {
               // labels: this.timestampArray, // x axis data
               labels: this.spacingArray,
@@ -130,6 +131,18 @@ export class AppComponent implements OnInit {
               ]
             },
             options: {
+              title: {
+                display: true,
+                text: "Your Listening History (Tap/Hover for details)"
+              },
+              layout: {
+               padding: {
+                   left: 0,
+                   right: 25,
+                   top: 0,
+                   bottom: 0
+               }
+           },
               responsive: true,
               maintainAspectRatio: false,
 
@@ -143,8 +156,7 @@ export class AppComponent implements OnInit {
                 display: true,
                 scaleLabel: {
                   display: true,
-                  labelString: '(click to toggle data)'
-                },
+                  labelString: 'Time (not to scale)'                },
                 ticks: {
                   display: false
                 },
